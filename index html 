@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scratch & Win ₹500</title>
+
+<style>
+body{
+  text-align:center;
+  font-family:Arial, sans-serif;
+  background:#f2f2f2;
+  padding-top:40px;
+}
+h2{
+  color:#d60000;
+}
+canvas{
+  margin-top:20px;
+  border:3px solid #000;
+  border-radius:10px;
+}
+#result{
+  margin-top:20px;
+  font-size:22px;
+  font-weight:bold;
+  color:green;
+}
+</style>
+</head>
+
+<body>
+
+<h2>JAGDAMBE ELECTRONICS</h2>
+<h3>Scratch & Win ₹500</h3>
+
+<canvas id="scratch" width="300" height="150"></canvas>
+
+<div id="result">🎁 Scratch Here 🎁</div>
+
+<script>
+var canvas = document.getElementById("scratch");
+var ctx = canvas.getContext("2d");
+
+ctx.fillStyle = "#999";
+ctx.fillRect(0,0,300,150);
+
+ctx.globalCompositeOperation = "destination-out";
+
+function scratch(e){
+  var rect = canvas.getBoundingClientRect();
+  var x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+  var y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+  ctx.beginPath();
+  ctx.arc(x, y, 15, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+canvas.addEventListener("mousemove", function(e){
+  if(e.buttons==1){ scratch(e); }
+});
+
+canvas.addEventListener("touchmove", function(e){
+  scratch(e);
+});
+
+document.getElementById("result").innerHTML =
+"🎉 Congratulations! You Won ₹500 🎉";
+</script>
+
+</body>
+</html>
